@@ -36,8 +36,8 @@ class LayerPolygon:
 
         # Buffering the colors shouldn't be necessary as it is not 
         # re-used and can save alot of memory usage.
-        self._colors = self.__color_map[self._types]
-        self._color_map = self.__color_map
+        self._color_map = self.__color_map_0 if self._extruder == 0 else self.__color_map_1
+        self._colors = self._color_map[self._types]
         
         # When type is used as index returns true if type == LayerPolygon.InfillType or type == LayerPolygon.SkinType or type == LayerPolygon.SupportInfillType
         # Should be generated in better way, not hardcoded.
@@ -185,15 +185,28 @@ class LayerPolygon:
     }
 
     # Should be generated in better way, not hardcoded.
-    __color_map = numpy.array([
-        [1.0, 1.0, 1.0, 1.0],
-        [1.0, 0.0, 0.0, 1.0],
-        [0.0, 1.0, 0.0, 1.0],
-        [1.0, 1.0, 0.0, 1.0],
-        [0.0, 1.0, 1.0, 1.0],
-        [0.0, 1.0, 1.0, 1.0],
-        [1.0, 0.74, 0.0, 1.0],
-        [0.0, 1.0, 1.0, 1.0],
-        [0.0, 0.0, 1.0, 1.0],
-        [0.5, 0.5, 1.0, 1.0]
+    __color_map_0 = numpy.array([
+        [1.0, 1.0, 1.0, 1.0],  # NoneType
+        [1.0, 0.0, 0.0, 1.0],  # Inset0Type
+        [0.0, 1.0, 0.0, 1.0],  # InsetXType
+        [1.0, 1.0, 0.0, 1.0],  # SkinType
+        [0.0, 1.0, 1.0, 1.0],  # SupportType
+        [0.0, 1.0, 1.0, 1.0],  # SkirtType
+        [1.0, 0.74, 0.0, 1.0], # InfillType
+        [0.0, 1.0, 1.0, 1.0],  # SupportInfillType
+        [0.0, 0.0, 1.0, 1.0],  # MoveCombingType
+        [0.5, 0.5, 1.0, 1.0]   # MoveRetractionType
+    ])
+    
+    __color_map_1 = numpy.array([
+        [1.0, 1.0, 1.0, 1.0],  # NoneType
+        [1.0, 0.8, 0.3, 1.0],  # Inset0Type
+        [0.7, 1.0, 0.3, 1.0],  # InsetXType
+        [1.0, 1.0, 0.6, 1.0],  # SkinType
+        [0.6, 1.0, 1.0, 1.0],  # SupportType
+        [0.6, 1.0, 1.0, 1.0],  # SkirtType
+        [1.0, 0.74, 0.6, 1.0], # InfillType
+        [0.6, 1.0, 1.0, 1.0],  # SupportInfillType
+        [0.0, 0.0, 1.0, 1.0],  # MoveCombingType
+        [0.5, 0.5, 1.0, 1.0]   # MoveRetractionType
     ])
